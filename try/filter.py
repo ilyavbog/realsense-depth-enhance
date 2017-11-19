@@ -94,5 +94,22 @@ def Filter (in0, in1, in2, in3, in4, out) :
 
 ################################################
 
-Filter ("in_f0.png", "in_f1.png", "in_f2.png", "in_f3.png", "in_f4.png", "out_a.png")
-#Filter ("14e99a1b77fceb00-00-depth.png", "14e99a1b77fceb00-01-depth.png", "14e99a1b77fceb00-02-depth.png", "14e99a1b77fceb00-03-depth.png", "14e99a1b77fceb00-04-depth.png", "out4.png")
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("in_file_1")
+parser.add_argument("in_file_2")
+parser.add_argument("in_file_3")
+parser.add_argument("in_file_4")
+parser.add_argument("in_file_5")
+parser.add_argument("out_file")
+args = parser.parse_args()
+
+error = False
+for name in args.in_file_1, args.in_file_2, args.in_file_3, args.in_file_4, args.in_file_5, args.out_file :
+    if name[-4:] != ".png" and name[-4:] != ".PNG" :
+        print ("invalid file name: %s" % (name));
+        error = True
+
+if not error :
+    Filter (args.in_file_1, args.in_file_2, args.in_file_3, args.in_file_4, args.in_file_5, args.out_file)
